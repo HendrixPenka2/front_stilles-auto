@@ -11,6 +11,7 @@ export interface User {
   phone?: string;
   avatar?: string;
   role: 'USER' | 'ADMIN';
+  isActive: boolean;
   emailVerified: boolean;
   createdAt: string;
 }

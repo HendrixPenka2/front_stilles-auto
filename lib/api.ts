@@ -178,6 +178,10 @@ export const authApi = {
       throw new ApiError(401, 'Email ou mot de passe incorrect');
     }
 
+    if (user.isActive === false) {
+      throw new ApiError(403, 'Votre compte est désactivé. Contactez l\'administrateur.');
+    }
+
     const userWithoutPassword = { ...user };
     delete (userWithoutPassword as any).password;
     
@@ -206,6 +210,7 @@ export const authApi = {
       phone: data.phone,
       avatar: undefined,
       role: 'USER' as const,
+      isActive: true,
       emailVerified: false,
       createdAt: new Date().toISOString(),
       password: data.password,
